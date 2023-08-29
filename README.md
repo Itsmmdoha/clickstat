@@ -1,2 +1,2 @@
-# klickate
-A url shortner with gps tracking feature.
+# klickstat
+A url shortner with tracking features like ip address and gps coordinates
