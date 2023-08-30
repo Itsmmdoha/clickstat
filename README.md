@@ -5,4 +5,4 @@ A url shortner with tracking features like ip address and gps coordinates
 ## To do
 
 1. Build a database to store the links and their indentifiers 
-2. Buil a front end.
+2. Build a front end.
