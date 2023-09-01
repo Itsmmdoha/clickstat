@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='show_link.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Link Page</h1>
+        <div class="link-container">
+            <p id="link" title="{{ link }}">{{ truncatedLink }}</p>
+            <button id="copy-button">Copy</button>
+            <p id="copy-status">Click to copy</p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='show_link.js') }}"></script>
+</body>
+</html>

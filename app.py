@@ -19,6 +19,10 @@ app = Flask(__name__)
 def home():
     r = render_template("index.html")
     return r
+@app.route("/createlink",methods=["POST"])
+def createlink():
+    url = request.form["url"]
+    return render_template("show_link.html",link=url)
 @app.route("/getlink",methods=["POST"])
 def data():
     data = request.json
