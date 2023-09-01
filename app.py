@@ -1,35 +1,49 @@
-from flask import Flask,request,render_template
-
-from dbm import Dbm 
-
-#this functino reads the .sql files content and returns it as string
-def sql(filename):
-    with open("sql/"+filename,"r") as f:
-        query = f.read()
-        return query
-
-#creating the database if it already dosn't exist
-database = Dbm()
-database.execute(sql_command=sql("create_links.sql"))
-database.execute(sql_command=sql("create_data.sql"))
+from flask import Flask,request,render_template, redirect
+from dbm import Dbm, command
+from utils import generate_identifier 
 
 app = Flask(__name__)
+base_url = "http://localhost:5000"
 
-@app.route("/")
+database = Dbm()
+database.init()
+
+@app.route("/") #homepage
 def home():
     r = render_template("index.html")
     return r
-@app.route("/createlink",methods=["POST"])
+
+@app.route("/createlink",methods=["POST"]) # this end point is used by the form in the home page to generate shor urls
 def createlink():
+    ip = request.remote_addr
     url = request.form["url"]
-    return render_template("show_link.html",link=url)
-@app.route("/getlink",methods=["POST"])
+    if "enable" in request.form:
+        TL = 1
+    else:
+        TL = 0
+    while True:
+        try:
+            identifier = generate_identifier()
+            data = {"url":url,"identifier":identifier, "TL":TL, "owner_ip":ip}
+            database = Dbm()
+            database.generate_link(data)
+            break
+        except:
+            continue
+    return render_template("show_link.html",link=base_url+f"/{identifier}")
+
+@app.route("/getlink",methods=["POST"]) #this route is used by the js that sends the gps data
 def data():
     data = request.json
     print(data)
     linkData = {"link" : "https://google.com"}
     return linkData
 
+@app.route("/<identifier>",methods=["GET"])
+def fetchURL(identifier):
+    db = Dbm()
+    link = db.fetch_link(identifier)
+    return redirect(link,code=302) 
 
 if __name__ == "__main__":
     app.run(debug=True)
