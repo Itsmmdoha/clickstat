@@ -1,6 +1,6 @@
-from flask import Flask,request,render_template, redirect, make_response
-from dbm import Dbm, command
-from utils import generate_identifier 
+from flask import Flask,request,render_template, redirect, make_response, jsonify
+from dbm import Dbm 
+from utils import *
 
 app = Flask(__name__)
 base_url = "http://localhost:5000"
@@ -77,6 +77,15 @@ def fetchURL(identifier):
             return render_template("locate.html",identifier=identifier)
     else:
         return "<h1>404 Not found</h1>"
+@app.route("/stat=<identifier>")
+def stats(identifier):
+    db = Dbm()
+    result = db.get_stats(identifier)
+    if result:
+        click_stats = parse_and_format(result)
+        return jsonify(click_stats) 
+    else:
+        return "<h1>No clicks yet.</h1>"
 
 if __name__ == "__main__":
     app.run(debug=True)

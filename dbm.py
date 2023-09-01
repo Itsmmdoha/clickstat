@@ -39,6 +39,9 @@ class Dbm:
     def insert_into_data(self,data):
         result = self.execute(command("insert_data.sql"),data)
         return result
+    def get_stats(self,identifier):
+        result = self.execute(command("get_stats.sql"),{"identifier":identifier})
+        return result
 
 
 
