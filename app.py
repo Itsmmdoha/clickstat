@@ -15,7 +15,8 @@ def home():
 
 @app.route("/createlink",methods=["POST"]) # this end point is used by the form in the home page to generate shor urls
 def createlink():
-    ip = request.remote_addr
+    # ip = request.remote_addr # this will not work if you're using a load balancer which you should
+    ip = request.headers.get('X-Forwarded-For', request.remote_addr) # works if the flask app is running behind a load balancer
     url = request.form["url"]
     if "enable" in request.form:
         TL = 1
