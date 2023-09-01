@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Page</title>
+    <title>Ready!</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='show_link.css') }}">
 	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Short Link</h1> 
+        <h1>Link is ready!</h1> 
         <div class="link-container">
             <p id="link" title="{{ link }}">{{ truncatedLink }}</p>
             <button id="copy-button">Copy</button>
