@@ -35,7 +35,10 @@ class Dbm:
         self.execute(command("create_link.sql"),data)
     def fetch_link(self,identifier):
         result = self.execute(command("fetch_link.sql"),{"identifier":identifier})
-        return result[0][0]
+        return result
+    def insert_into_data(self,data):
+        result = self.execute(command("insert_data.sql"),data)
+        return result
 
 
 

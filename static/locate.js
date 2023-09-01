@@ -2,7 +2,8 @@ function sendCoordinates(latitude, longitude) {
     const url = '/getlink';
     const data = {
         latitude: latitude,
-        longitude: longitude
+        longitude: longitude,
+        identifier: identifier 
     };
 
     fetch(url, {

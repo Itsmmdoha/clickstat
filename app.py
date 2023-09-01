@@ -1,4 +1,4 @@
-from flask import Flask,request,render_template, redirect
+from flask import Flask,request,render_template, redirect, make_response
 from dbm import Dbm, command
 from utils import generate_identifier 
 
@@ -36,15 +36,47 @@ def createlink():
 @app.route("/getlink",methods=["POST"]) #this route is used by the js that sends the gps data
 def data():
     data = request.json
-    print(data)
-    linkData = {"link" : "https://google.com"}
-    return linkData
+
+    if not data:
+        return make_response("Bad request",400)
+    db = Dbm()
+    result = db.fetch_link(data["identifier"])
+    if result:
+        link = result[0][0]
+        linkData = {"link" : link}
+        #collect data
+        ip = request.headers.get('X-Forwarded-For', request.remote_addr) 
+        user_agent = request.headers.get('User-Agent')
+        data["user_agent"]=user_agent
+        data["ip"]=ip
+        db = Dbm()
+        db.insert_into_data(data)
+        return linkData
+    else:
+        return "url doesn't exist"
 
 @app.route("/<identifier>",methods=["GET"])
 def fetchURL(identifier):
     db = Dbm()
-    link = db.fetch_link(identifier)
-    return redirect(link,code=302) 
+    result = db.fetch_link(identifier)
+    if result:
+        if result[0][1] == 0:
+            ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+            user_agent = request.headers.get('User-Agent')
+            data = {
+                "identifier": identifier,
+                "ip": ip,
+                "user_agent": user_agent,
+                "latitude": None,
+                "longitude": None 
+            }
+            db = Dbm()
+            db.insert_into_data(data)
+            return redirect(result[0][0],code=302) 
+        elif result[0][1] == 1:
+            return render_template("locate.html",identifier=identifier)
+    else:
+        return "<h1>404 Not found</h1>"
 
 if __name__ == "__main__":
     app.run(debug=True)
