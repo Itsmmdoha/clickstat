@@ -77,13 +77,13 @@ def fetchURL(identifier):
             return render_template("locate.html",identifier=identifier)
     else:
         return "<h1>404 Not found</h1>"
-@app.route("/stat=<identifier>")
+@app.route("/stats=<identifier>")
 def stats(identifier):
     db = Dbm()
     result = db.get_stats(identifier)
     if result:
         click_stats = parse_and_format(result)
-        return jsonify(click_stats) 
+        return render_template("show_stats.html",data=click_stats) 
     else:
         return "<h1>No clicks yet.</h1>"
 
