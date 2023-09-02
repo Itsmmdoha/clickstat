@@ -11,17 +11,13 @@ class Dbm:
         try:
             conn = sqlite3.connect("database.db")
             cursor = conn.cursor()
-
             if params_dict:
                 result = cursor.execute(sql_command, params_dict)
             else:
                 result = cursor.execute(sql_command)
-
             data = result.fetchall()
-
             conn.commit()
             conn.close()
-
             return data
         except sqlite3.Error as e:
             print("SQLite error:", e)
@@ -42,6 +38,3 @@ class Dbm:
     def get_stats(self,identifier):
         result = self.execute(command("get_stats.sql"),{"identifier":identifier})
         return result
-
-
-

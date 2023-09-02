@@ -37,3 +37,23 @@
         width: 70%;
         /* Adjust the width as needed */
     }
+    
+/* Add a media query for smaller screens */
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+        overflow-x: auto; /* Enable horizontal scrolling */
+    }
+
+    /* Reset column widths for smaller screens */
+    .small-column,
+    .large-column {
+        width: auto;
+    }
+
+    /* Allow line wrapping for the User Agent column */
+    .large-column {
+        white-space: normal; /* Allow text to wrap */
+        word-wrap: break-word; /* Break long words to fit */
+    }
+}
