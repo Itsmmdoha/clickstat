@@ -1,4 +1,4 @@
-from flask import Flask,request,render_template, redirect, make_response, jsonify
+from flask import Flask,request,render_template, redirect, make_response 
 from dbm import Dbm 
 from utils import *
 
@@ -83,7 +83,7 @@ def stats(identifier):
     result = db.get_stats(identifier)
     if result:
         click_stats = parse_and_format(result)
-        return render_template("show_stats.html",data=click_stats) 
+        return render_template("show_stats.html", identifier=identifier, data=click_stats) 
     else:
         return render_template("unavailable.html") 
 
