@@ -6,13 +6,6 @@ body {
     padding: 0;
 }
 
-/* Style the h4 tag for the URL input section */
-h4 {
-    font-size: 18px;
-    color: #fff; /* Green color */
-    text-align: center;
-    margin-top: 20px;
-}
 
 /* Style the form */
 form {

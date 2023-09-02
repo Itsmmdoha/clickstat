@@ -31,7 +31,7 @@ def createlink():
             break
         except:
             continue
-    return render_template("show_link.html",link=base_url+f"/{identifier}")
+    return render_template("show_link.html",link=base_url+f"/{identifier}",identifier=identifier)
 
 @app.route("/getlink",methods=["POST"]) #this route is used by the js that sends the gps data
 def data():
