@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #262626;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 46px;
+            color: #39b54a;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+    {% block title %} {% endblock %}
+    {% block static_files %} {% endblock %}
+</head>
+
+<body>
+    {% block content%}
+    {% endblock %}
+</body>
+
+</html>

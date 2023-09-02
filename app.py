@@ -76,7 +76,7 @@ def fetchURL(identifier):
         elif result[0][1] == 1:
             return render_template("locate.html",identifier=identifier)
     else:
-        return "<h1>404 Not found</h1>"
+        return render_template("404.html")
 @app.route("/stats=<identifier>")
 def stats(identifier):
     db = Dbm()
@@ -85,7 +85,7 @@ def stats(identifier):
         click_stats = parse_and_format(result)
         return render_template("show_stats.html",data=click_stats) 
     else:
-        return "<h1>No clicks yet.</h1>"
+        return render_template("unavailable.html") 
 
 if __name__ == "__main__":
     app.run(debug=True)

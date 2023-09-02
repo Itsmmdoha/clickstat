@@ -1,72 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Data Table</title>
-    <style>
-        body {
-            background-color: #222;
-            color: #fff;
-            font-family: Arial, sans-serif;
-        }
-        table {
-            width: 100%;
-            table-layout: fixed;
-            border-collapse: collapse;
-            border: 1px solid #4CAF50;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #4CAF50;
-        }
-        th {
-            background-color: #4CAF50;
-            color: #fff;
-        }
-        tr:hover {
-            background-color: #555;
-        }
-        .location-link {
-            color: #4CAF50;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        /* Set the widths for the columns */
-        .small-column {
-            width: 15%; /* Adjust the width as needed */
-        }
-        .large-column {
-            width: 70%; /* Adjust the width as needed */
-        }
-    </style>
-</head>
-<body>
-    <h1>JSON Data Table</h1>
-    <table>
-        <thead>
-            <tr>
-                <th class="small-column">IP</th>
-                <th class="small-column">Location</th>
-                <th class="small-column">Timestamp</th>
-                <th class="large-column">User Agent</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for entry in data %}
-            <tr>
-                <td class="small-column">{{ entry['ip'] }}</td>
-                <td class="small-column">
-                    <a class="location-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps?q={{ entry['latitude'] }},{{ entry['longitude'] }}">
-                        {{ entry['latitude'] }}, {{ entry['longitude'] }}
-                    </a>
-                </td>
-                <td class="small-column">{{ entry['timestamp'] }}</td>
-                <td class="large-column">{{ entry['user_agent'] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+<title>stats</title>
+{% endblock%}
+
+{% block static_files%}
+<link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+{% endblock%}
+
+{% block content %}
+<h1>Showing stats for "{{identifier}}"</h1>
+<table>
+    <thead>
+        <tr>
+            <th class="small-column">IP</th>
+            <th class="small-column">Location</th>
+            <th class="small-column">Timestamp</th>
+            <th class="large-column">User Agent</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in data %}
+        <tr>
+            <td class="small-column">{{ entry['ip'] }}</td>
+            <td class="small-column">
+                <a class="location-link" target="_blank" rel="noopener noreferrer"
+                    href="https://www.google.com/maps?q={{ entry['latitude'] }},{{ entry['longitude'] }}">
+                    {{ entry['latitude'] }}, {{ entry['longitude'] }}
+                </a>
+            </td>
+            <td class="small-column">{{ entry['timestamp'] }}</td>
+            <td class="large-column">{{ entry['user_agent'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock%}

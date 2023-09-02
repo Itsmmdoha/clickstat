@@ -6,14 +6,6 @@ body {
     padding: 0;
 }
 
-/* Style the header */
-h1 {
-    font-size: 46px;
-    color: #39b54a; /* Green color */
-    text-align: center;
-    margin-top: 40px;
-}
-
 /* Style the h4 tag for the URL input section */
 h4 {
     font-size: 18px;

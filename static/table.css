@@ -1,0 +1,39 @@
+    table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+        border: 1px solid #4CAF50;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #4CAF50;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: #fff;
+    }
+
+    tr:hover {
+        background-color: #555;
+    }
+
+    .location-link {
+        color: #4CAF50;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    /* Set the widths for the columns */
+    .small-column {
+        width: 15%;
+        /* Adjust the width as needed */
+    }
+
+    .large-column {
+        width: 70%;
+        /* Adjust the width as needed */
+    }

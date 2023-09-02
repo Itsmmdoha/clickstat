@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clickstat</title>
+{% extends 'base.html' %}
+
+{% block title %}
+<title>CLICKSTAT</title>
+{% endblock%}
+
+{% block static_files%}
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
-</head>
-<body>
+{% endblock%}
+
+
+{% block content%}
     <h1>CLICKSTAT</h1>
     <h4>Enter a URL to shorten</h4>
     <form action="createlink" method="post">
@@ -18,5 +20,4 @@
         <br><br>
         <input type="submit" value="shorten" id="submit_button">
     </form>
-</body>
-</html>
+{% endblock%}

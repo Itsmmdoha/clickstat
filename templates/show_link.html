@@ -1,21 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ready!</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='show_link.css') }}">
-	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Link is ready!</h1> 
-        <div class="link-container">
-            <p id="link" title="{{ link }}">{{ truncatedLink }}</p>
-            <button id="copy-button">Copy</button>
-            <p id="copy-status">copied!</p>
-        </div>
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Ready!</title>
+{% endblock%}
+
+{% block static_files%}
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+{% endblock%}
+
+
+{% block content%}
+<link rel="stylesheet" href="{{ url_for('static', filename='show_link.css') }}">
+<div class="container">
+    <h1>Link is ready!</h1>
+    <div class="link-container">
+        <p id="link" title="{{ link }}">{{ truncatedLink }}</p>
+        <button id="copy-button">Copy</button>
+        <p id="copy-status">copied!</p>
     </div>
-    <script src="{{ url_for('static', filename='show_link.js') }}"></script>
-</body>
-</html>
+</div>
+<script src="{{ url_for('static', filename='show_link.js') }}"></script>
+
+{% endblock %}
