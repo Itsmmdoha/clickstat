@@ -1,0 +1,19 @@
+/* Navbar styles */
+.navbar {
+    background-color: #4CAF50; /* Green background color */
+    overflow: hidden;
+}
+
+.navbar a {
+    float: left;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
 
 <head>
     <meta charset="UTF-8">
@@ -23,12 +22,18 @@
     </style>
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
     {% block title %} {% endblock %}
     {% block static_files %} {% endblock %}
 </head>
 
 <body>
-    {% block content%}
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/stats=">Stats</a>
+        <a href="/about">About</a>
+    </div>
+    {% block content %}
     {% endblock %}
 </body>
 
