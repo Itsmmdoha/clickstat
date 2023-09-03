@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>stats</title>
+{% endblock%}
+
+{% block static_files%}
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+{% endblock%}
+
+
+{% block content%}
+    <h4>Please enter a URL to view the stats</h4>
+    <div class="custom-paragraph">
+      The six character long text after the slash at the end of your short url is called the <b>identifier</b>
+      It lets you access details about the individuals who click the link, such as IP address, user agent and exact location if enabled <b>GPS Tracking</b>.
+    </div>
+    <form action="stats" method="post">
+        <input name="identifier" type="text" placeholder="Enter an identifier">
+        <br><br>
+        <input type="submit" value="View" id="submit_button">
+    </form>
+{% endblock%}

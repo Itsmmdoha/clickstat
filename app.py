@@ -77,15 +77,19 @@ def fetchURL(identifier):
             return render_template("locate.html",identifier=identifier)
     else:
         return render_template("404.html")
-@app.route("/stats=<identifier>")
-def stats(identifier):
-    db = Dbm()
-    result = db.get_stats(identifier)
-    if result:
-        click_stats = parse_and_format(result)
-        return render_template("show_stats.html", identifier=identifier, data=click_stats) 
+@app.route("/stats",methods=["GET","POST"])
+def stats():
+    if request.method == "POST":
+        identifier = request.form["identifier"]
+        db = Dbm()
+        result = db.get_stats(identifier)
+        if result:
+            click_stats = parse_and_format(result)
+            return render_template("show_stats.html", identifier=identifier, data=click_stats) 
+        else:
+            return render_template("unavailable.html") 
     else:
-        return render_template("unavailable.html") 
+        return render_template("stats.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
