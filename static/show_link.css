@@ -1,9 +1,9 @@
 .container {
-    margin: auto;
-    padding: 80px;
-    width: 80%;
-    max-width: 400px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh; 
 }
 
 h1 {
@@ -13,7 +13,7 @@ h1 {
 
 .link-container {
     background-color: #333;
-    padding: 0.5rem;
+    padding: 0.6rem;
     border-radius: 4px;
     display: flex;
     align-items: center;
