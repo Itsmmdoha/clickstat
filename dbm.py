@@ -9,7 +9,7 @@ class Dbm:
 
     def execute(self, sql_command, params_dict=None): #using type hints for the first time! 
         try:
-            conn = sqlite3.connect("database.db")
+            conn = sqlite3.connect("/drive1/database.db")
             cursor = conn.cursor()
             if params_dict:
                 result = cursor.execute(sql_command, params_dict)
