@@ -4,52 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            background-color: #262626;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
 
-        h1 {
-            font-size: 46px;
-            color: #39b54a;
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        h4 {
-            font-size: 18px;
-            color: #fff;
-            /* Green color */
-            text-align: center;
-            margin-top: 20px;
-        }
-
-
-        .custom-paragraph {
-            color: #999;
-            width: 95%;
-            margin: 0 auto;
-            padding: 10px;
-        }
-
-        a {
-            color: #4CAF50;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #4CAF50;
-            text-decoration: none;
-            transition: text-shadow 0.3s ease-in-out;
-            text-shadow: 0 0 2px #4CAF50;
-        }
-    </style>
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
     {% block title %} {% endblock %}
