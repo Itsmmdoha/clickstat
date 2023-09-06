@@ -15,8 +15,8 @@
 
 .developer img {
     border-radius: 10px; /* Rounded corners */
-    width: 23rem;
-    height: 23rem;
+    width: 300px;
+    height: 300px;
 }
 
 @media screen and (min-width: 768px) {
