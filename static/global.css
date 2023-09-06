@@ -44,6 +44,12 @@ h1 {
     text-align: center;
     margin-top: 40px;
 }
+h2 {
+    font-size: 36px;
+    color: #dfe3de;
+    text-align: center;
+    margin-top: 40px;
+}
 
 h4 {
     font-size: 18px;
@@ -71,6 +77,7 @@ a {
     color: #4CAF50;
     text-decoration: none;
     transition: color 0.3s ease;
+    font-weight: bold;
 }
 
 a:hover {
@@ -78,5 +85,6 @@ a:hover {
     text-decoration: none;
     transition: text-shadow 0.3s ease-in-out;
     text-shadow: 0 0 2px #4CAF50;
+    font-weight: bold;
 }
 

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>About Clickstat</title>
+{% endblock %}
+{% block static_files%}
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+{% endblock%}
+
+{% block content %}
+<h2>About Clickstat</h2>
+<div class="custom-paragraph">
+        Clickstat is more than just a URL shortener; it's a powerful tool that empowers you to shorten links, while also gaining insights into the individuals who interact with them. With Clickstat, you can access valuable information such as IP addresses, user agents, and, if enabled, precise GPS locations of your link's clickers. Unlike other IP loggers that provide inaccurate location data, Clickstat utilizes GPS for pinpoint accuracy.
+        Experience the best and most feature-packed URL shortener on the internet. Clickstat - The most feature-packed URL shortener.
+    </p>
+
+    <h2>Meet the Developer</h2>
+    <div class="developer-container">
+        <div class="developer">
+            <img src="https://avatars.githubusercontent.com/u/70005698?s=400&u=be7b458409ce91ebe4b492eece92147ead6cd165&v=4" alt="Developer Image">
+        </div>
+        <div class="developer-description">
+            <p>
+            Hi,<br>I'm Monazir Muhammad Doha, I am 18 years old; turning 19 next September 19th, I'm on a mission to bring my ideas to life. I thrive on turning everyday challenges into opportunities to create innovative solutions
+            </p>
+            <a href="https://github.com/itsmmdoha">GitHub</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
