@@ -6,8 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
-    {% block title %} {% endblock %}
     {% block static_files %} {% endblock %}
+    <title>{{title}}</title>
+    <meta property="og:title" content="{{title}}">
+    <meta property="og:site_name" content="clickstat">
+    <meta property="og:type" content="website">
+    <meta name="description" content="{{description}}">
+    <meta property="og:description" content="{{description}}">
+    <meta property="og:image" content="{{ url_for('static', filename='preview.png') }}">
+    <meta property="og:url" content="{{url}}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{title}}">
+    <meta name="twitter:description" content="{{description}}">
+    <meta name="twitter:image" content="{{ url_for('static', filename='favicon.png') }}">
+
 </head>
 
 <body>

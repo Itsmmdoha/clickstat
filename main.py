@@ -12,7 +12,7 @@ database.init()
 
 @app.route("/") #homepage
 def home():
-    r = render_template("index.html")
+    r = render_template("index.html",url=request.url,title="Clickstat - A URL shortner with IP and GPS loging",description="Clickstat is a URL shortener with IP and location tracking capabilities. Shorten your links with Clickstat, and you will be able to view information about those who click on it. This information includes IP address, GPS location, User-Agent, and more. Unlike other services, Clickstat uses GPS to log the location for pinpoint accuracy. Experience the most feature-packed URL shortener with Clickstat.")
     return r
 
 @app.route("/createlink",methods=["POST"]) # this end point is used by the form in the home page to generate shor urls
@@ -90,10 +90,10 @@ def stats():
         else:
             return render_template("unavailable.html") 
     else:
-        return render_template("stats.html")
+        return render_template("stats.html",url=request.url,title="Stats - View data about your shortened links.",description="You can view information about your shortened links on this page.")
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    return render_template("about.html",url=request.url,title="About Clickstat",description="Clickstat is a URL shortener with IP and location tracking capabilities. Shorten your links with Clickstat, and you will be able to view information about those who click on it. This information includes IP address, GPS location, User-Agent, and more. Unlike other services, Clickstat uses GPS to log the location for pinpoint accuracy. Experience the most feature-packed URL shortener with Clickstat.")
 if __name__ == "__main__":
     app.run(debug=True,host="0.0.0.0")
