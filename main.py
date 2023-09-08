@@ -77,7 +77,7 @@ def fetchURL(identifier):
         elif result[0][1] == 1:
             return render_template("locate.html",identifier=identifier)
     else:
-        return render_template("404.html")
+        return render_template("404.html",utl=request.url, title="404 Not Found",description="404 Not Found")
 @app.route("/stats",methods=["GET","POST"])
 def stats():
     if request.method == "POST":
