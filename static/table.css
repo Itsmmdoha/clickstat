@@ -42,7 +42,7 @@
 @media (max-width: 768px) {
     table {
         width: 100%;
-        overflow-x: auto; /* Enable horizontal scrolling */
+        font-size: 10px;
     }
 
     /* Reset column widths for smaller screens */

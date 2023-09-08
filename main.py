@@ -1,9 +1,11 @@
+from os import getenv
+import socket
 from flask import Flask,request,render_template, redirect, make_response 
 from dbm import Dbm 
 from utils import *
 
 app = Flask(__name__)
-base_url = "http://localhost:5000"
+base_url = getenv("BASE_URL",default=f"http://{socket.gethostbyname(socket.gethostname())}:5000")
 
 database = Dbm()
 database.init()
@@ -94,4 +96,4 @@ def stats():
 def about():
     return render_template("about.html")
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,host="0.0.0.0")
