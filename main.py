@@ -12,7 +12,7 @@ database.init()
 
 @app.route("/") #homepage
 def home():
-    r = render_template("index.html",url=request.url,title="Clickstat - A URL shortner with IP and GPS loging",description="Clickstat is a URL shortener with IP and location tracking capabilities. Shorten your links with Clickstat, and you will be able to view information about those who click on it. This information includes IP address, GPS location, User-Agent, and more. Unlike other services, Clickstat uses GPS to log the location for pinpoint accuracy. Experience the most feature-packed URL shortener with Clickstat.")
+    r = render_template("index.html",url=request.url,title="Clickstat - A URL shortener with IP and GPS loging",description="Clickstat is a URL shortener with IP and location tracking capabilities. Shorten your links with Clickstat, and you will be able to view information about those who click on it. This information includes IP address, GPS location, User-Agent, and more. Unlike other services, Clickstat uses GPS to log the location for pinpoint accuracy. Experience the most feature-packed URL shortener with Clickstat.")
     return r
 
 @app.route("/createlink",methods=["POST"]) # this end point is used by the form in the home page to generate shor urls
