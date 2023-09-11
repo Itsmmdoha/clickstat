@@ -1,9 +1,9 @@
 # Clickstat
-A url shortner with GPS tracking features along with ip address and user-agent coordinates
+Clickstat is a URL shortener with IP and GPS logging. It logs information like IP address User-Agent and GPS-Coordinates if GPS Tracking is enabled.
+Access it at [clickstat.xyz](https://clickstat.xyz)
 
-> It's a work in progress.
+## Features
+1. IP Logging
+2. User-Agent Logging
+3. GPS Loggin
 
-## To do
-
-1. Build a database to store the links and their indentifiers (Done) 
-2. Build a front end to present the data about the clicks
