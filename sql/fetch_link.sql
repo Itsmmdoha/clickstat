@@ -1,1 +1,1 @@
-SELECT url, TL from links where identifier = :identifier;
+SELECT url, TL from links where identifier = %(identifier)s;

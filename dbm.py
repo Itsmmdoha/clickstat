@@ -1,4 +1,5 @@
-import sqlite3
+import psycopg2 
+from os import getenv
 
 def command(filename):
     with open("sql/"+filename,"r") as f:
@@ -6,22 +7,41 @@ def command(filename):
         return query
 
 class Dbm:
-
-    def execute(self, sql_command, params_dict=None): #using type hints for the first time! 
+    def execute(self, sql_command, params=None):
         try:
-            conn = sqlite3.connect("database.db")
+            db_name = getenv('PGDATABASE')
+            user = getenv('PGUSER')
+            password = getenv('PGPASSWORD')
+            host = getenv('PGHOST')
+            port = getenv('PGPORT')
+
+            conn = psycopg2.connect(
+                database=db_name,
+                user=user,
+                password=password,
+                host=host,
+                port=port
+            )
+
             cursor = conn.cursor()
-            if params_dict:
-                result = cursor.execute(sql_command, params_dict)
+
+            if params:
+                cursor.execute(sql_command, params)
             else:
-                result = cursor.execute(sql_command)
-            data = result.fetchall()
+                cursor.execute(sql_command)
+
+            if sql_command.lower().strip().startswith('select'):
+                data = cursor.fetchall()
+            else:
+                data = None
+
             conn.commit()
             conn.close()
             return data
-        except sqlite3.Error as e:
-            print("SQLite error:", e)
-            return None
+
+        except Exception as e:
+            print(f"Error: {e}")
+
 
     def init(self):
         self.execute(sql_command=command("create_table_links.sql"))
