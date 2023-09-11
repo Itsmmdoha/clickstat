@@ -5,7 +5,7 @@ from dbm import Dbm
 from utils import *
 
 app = Flask(__name__)
-base_url = getenv("BASE_URL",default=f"http://{socket.gethostbyname(socket.gethostname())}:5000")
+base_url = getenv("BASE_URL",default="localhost:5000")
 
 database = Dbm()
 database.init()
@@ -96,4 +96,4 @@ def stats():
 def about():
     return render_template("about.html",url=request.url,title="About Clickstat",description="Clickstat is a URL shortener with IP and location tracking capabilities. Shorten your links with Clickstat, and you will be able to view information about those who click on it. This information includes IP address, GPS location, User-Agent, and more. Unlike other services, Clickstat uses GPS to log the location for pinpoint accuracy. Experience the most feature-packed URL shortener with Clickstat.")
 if __name__ == "__main__":
-    app.run(debug=True,host="0.0.0.0")
+    app.run(debug=True,port=getenv("PORT",default=5000))
