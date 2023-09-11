@@ -17,8 +17,10 @@ def home():
 
 @app.route("/createlink",methods=["POST"]) # this end point is used by the form in the home page to generate shor urls
 def createlink():
-    ip = get_client_ip(request)
     url = request.form["url"]
+    if url=="":
+        return render_template("invalid_url.html",title="Invalid URL")
+    ip = get_client_ip(request)
     if "enable" in request.form:
         TL = 1
     else:
