@@ -19,6 +19,10 @@ def home():
 def robots():
     return send_from_directory(app.static_folder,"robots.txt")
 
+@app.route("/sitemap.xml")
+def sitemap():
+    return send_from_directory(app.static_folder,"sitemap.xml")
+
 @app.route("/createlink",methods=["POST"]) # this end point is used by the form in the home page to generate shor urls
 def createlink():
     url = request.form["url"]
