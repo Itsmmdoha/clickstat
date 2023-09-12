@@ -1,5 +1,7 @@
 # Clickstat
-Clickstat is a URL shortener with IP and GPS logging. It logs information like IP address User-Agent and GPS-Coordinates if GPS Tracking is enabled.
+![preview](https://github.com/Itsmmdoha/clickstat/assets/70005698/c25de049-b2bc-48f5-9a3f-20b1c6b99f8a)
+Clickstat is 
+a URL shortener with IP and GPS logging. It logs information like IP address User-Agent and GPS-Coordinates if GPS Tracking is enabled.
 Access it at [clickstat.xyz](https://clickstat.xyz)
 
 ## Features
