@@ -90,7 +90,7 @@ def fetchURL(identifier):
         elif result[0][1] == 1:
             return render_template("locate.html",identifier=identifier)
     else:
-        return render_template("404.html",utl=request.url, title="404 Not Found",description="404 Not Found")
+        return render_template("error.html",utl=request.url,error="404 Not Found", title="404 Not Found",description="404 Not Found")
 @app.route("/stats",methods=["GET","POST"])
 def stats():
     if request.method == "POST":
@@ -101,7 +101,7 @@ def stats():
             click_stats = parse_and_format(result)
             return render_template("show_stats.html", identifier=identifier, data=click_stats) 
         else:
-            return render_template("unavailable.html") 
+            return render_template("error.html",error="Unavailable", title="Unavailable") 
     else:
         return render_template("stats.html",url=request.url,title="Stats - View data about your shortened links.",description="You can view information about your shortened links on this page.")
 
@@ -113,9 +113,13 @@ def about():
 @app.route("/lookup=<ip>")
 def ip_info(ip):
     print(ip)
-    data_string = get(f"https://ipinfo.io/{ip}?token={api_token}").text
-    data = loads(data_string)
-    return render_template("ip_info.html",title="IP Info",ip=ip,data=data)
+    res = get(f"https://ipinfo.io/{ip}?token={api_token}")
+    if res.status_code == 200:
+        data_string = res.text
+        data = loads(data_string)
+        return render_template("ip_info.html",title="IP Info",ip=ip,data=data)
+    else:
+        return render_template("error.html",error="unknown error")
 
 if __name__ == "__main__":
     app.run(debug=True,port=getenv("PORT",default=5000))
