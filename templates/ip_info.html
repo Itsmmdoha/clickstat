@@ -1,0 +1,112 @@
+{% extends 'base.html'%}
+
+{% block static_files%}
+<style>
+  table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 20px auto;
+  }
+
+  th,
+  td {
+    border: 1px solid #4CAF50;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #4CAF50;
+  }
+</style>
+{% endblock%}
+
+{% block content %}
+<h1>Information for "{{ip}}"</h1>
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>IP</td>
+    <td id="query"></td>
+  </tr>
+  <tr>
+    <td>Country</td>
+    <td id="country"></td>
+  </tr>
+  <tr>
+    <td>Country Code</td>
+    <td id="countryCode"></td>
+  </tr>
+  <tr>
+    <td>Region</td>
+    <td id="region"></td>
+  </tr>
+  <tr>
+    <td>Region Name</td>
+    <td id="regionName"></td>
+  </tr>
+  <tr>
+    <td>City</td>
+    <td id="city"></td>
+  </tr>
+  <tr>
+    <td>Zip</td>
+    <td id="zip"></td>
+  </tr>
+  <tr>
+    <td>Latitude</td>
+    <td id="lat"></td>
+  </tr>
+  <tr>
+    <td>Longitude</td>
+    <td id="lon"></td>
+  </tr>
+  <tr>
+    <td>Timezone</td>
+    <td id="timezone"></td>
+  </tr>
+  <tr>
+    <td>ISP</td>
+    <td id="isp"></td>
+  </tr>
+  <tr>
+    <td>Organization</td>
+    <td id="org"></td>
+  </tr>
+  <tr>
+    <td>AS</td>
+    <td id="as"></td>
+  </tr>
+  <tr>
+    <td>Status</td>
+    <td id="status"></td>
+  </tr>
+</table>
+
+<script>
+  fetch('http://ip-api.com/json/{{ip}}')
+    .then(response => response.json())
+    .then(data => {
+      // Set the values in the table cells
+      document.getElementById('status').textContent = data.status;
+      document.getElementById('country').textContent = data.country;
+      document.getElementById('countryCode').textContent = data.countryCode;
+      document.getElementById('region').textContent = data.region;
+      document.getElementById('regionName').textContent = data.regionName;
+      document.getElementById('city').textContent = data.city;
+      document.getElementById('zip').textContent = data.zip;
+      document.getElementById('lat').textContent = data.lat;
+      document.getElementById('lon').textContent = data.lon;
+      document.getElementById('timezone').textContent = data.timezone;
+      document.getElementById('isp').textContent = data.isp;
+      document.getElementById('org').textContent = data.org;
+      document.getElementById('as').textContent = data.as;
+      document.getElementById('query').textContent = data.query;
+    })
+    .catch(error => console.error('Error:', error));
+</script>
+</body>
+{% endblock %}

@@ -102,6 +102,10 @@ def stats():
     else:
         return render_template("stats.html",url=request.url,title="Stats - View data about your shortened links.",description="You can view information about your shortened links on this page.")
 
+@app.route("/lookup=<ip>")
+def ip_info(ip):
+    return render_template("ip_info.html",title="IP Info",ip=ip)
+
 @app.route("/about")
 def about():
     return render_template("about.html",url=request.url,title="About Clickstat",description="Clickstat is a URL shortener with IP and location tracking capabilities. Shorten your links with Clickstat, and you will be able to view information about those who click on it. This information includes IP address, GPS location, User-Agent, and more. Unlike other services, Clickstat uses GPS to log the location for pinpoint accuracy. Experience the most feature-packed URL shortener with Clickstat.")
