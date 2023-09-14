@@ -1,5 +1,4 @@
 from os import getenv
-import socket
 from flask import Flask,request,render_template, redirect, make_response, send_from_directory
 from dbm import Dbm 
 from utils import *
@@ -119,7 +118,7 @@ def ip_info(ip):
         data = loads(data_string)
         return render_template("ip_info.html",title="IP Info",ip=ip,data=data)
     else:
-        return render_template("error.html",error="unknown error")
+        return render_template("error.html",error="Unknown Error")
 
 if __name__ == "__main__":
     app.run(debug=True,port=getenv("PORT",default=5000))

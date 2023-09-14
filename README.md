@@ -9,14 +9,16 @@ Access it at [clickstat.xyz](https://clickstat.xyz)
 1. IP Logging
 2. User-Agent Logging
 3. GPS Loggin
+4. IP lookup
 
 ## Run Locally
 
 >steps:
 >1. Setup PostgreSQL
->2. Set Environment Variables
->3. Install Requirements
->4. Run main.py
+>2. Get API token from ipinfo.io
+>3. Set Environment Variables
+>4. Install Requirements
+>5. Run main.py
 
 ### Step1:
 
@@ -24,13 +26,20 @@ Install PostgreSQL and Collect the collect/set your database credentials
 
 ### Step2:
 
-The flask app collects the database credentials from your Environment Variables. To set the Variables, add the following lines to your .bashrc or .zshrc file
+This Flask app uses the ipinfo.io API. Get your API token from [here.](https://ipinfo.io/).
+
+### Step3:
+
+The flask app collects the API and database credentials from your Environment Variables. To set the Variables, add the following lines to your .bashrc or .zshrc file
 ```bash
+# Databse Creds
 export PGPASSWORD='your_database_password'
 export PGHOST='your_host'
 export PGUSER='your_username'
 export PGPORT='your_port_number'
 export PGDATABASE='your_database_name'
+# API token
+export API_TOKEN='your ipinfo.io api token'
 
 ```
 Make sure to replace accordingly with the actual credentials. After adding these lines, source the file by
