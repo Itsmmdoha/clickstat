@@ -52,12 +52,12 @@ source .zshrc
 ```
 if you're using zsh.
 
-### Step3:
+### Step4:
 
 Now it's time to install the Requirements. Go to the clickstat directory and type,
 ```bash
 pip install -r requirements.txt
 ```
-### Step4:
+### Step5:
 
 Everything is set-up! Now just run the main.py file with python3.
