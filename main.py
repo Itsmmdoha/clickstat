@@ -6,7 +6,6 @@ from requests import get
 from json import loads
 
 app = Flask(__name__)
-base_url = getenv("BASE_URL",default="localhost:5000")
 api_token = getenv("API_TOKEN",default="Undefined")
 
 database = Dbm()
@@ -28,6 +27,7 @@ def sitemap():
 @app.route("/createlink",methods=["POST"]) # this end point is used by the form in the home page to generate shor urls
 def createlink():
     url = request.form["url"]
+    host = request.host
     if url=="":
         return render_template("invalid_url.html",title="Invalid URL")
     ip = get_client_ip(request)
@@ -44,7 +44,7 @@ def createlink():
             break
         except:
             continue
-    return render_template("show_link.html",link=base_url+f"/{identifier}",identifier=identifier)
+    return render_template("show_link.html",link=host+f"/{identifier}",identifier=identifier)
 
 @app.route("/getlink",methods=["POST"]) #this route is used by the js that sends the gps data
 def data():
