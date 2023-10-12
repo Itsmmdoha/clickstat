@@ -1,11 +1,6 @@
 import psycopg2 
 from os import getenv
 
-#dev block
-from dotenv import load_dotenv
-load_dotenv()
-#end of dev block
-
 def command(filename):
     with open("sql/"+filename,"r") as f:
         query = f.read()
