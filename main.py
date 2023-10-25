@@ -27,7 +27,7 @@ def sitemap():
 @app.route("/createlink",methods=["POST"]) # this end point is used by the form in the home page to generate shor urls
 def createlink():
     url = request.form["url"]
-    host = request.host
+    host = request.host.replace("www.","")
     if url=="":
         return render_template("invalid_url.html",title="Invalid URL")
     ip = get_client_ip(request)
