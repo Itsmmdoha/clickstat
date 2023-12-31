@@ -100,7 +100,7 @@ def stats():
             click_stats = parse_and_format(result)
             return render_template("show_stats.html", identifier=identifier, data=click_stats) 
         else:
-            return render_template("error.html",error="Unavailable", title="Unavailable") 
+            return render_template("error.html",error="Nobody has clicked that link just yet!", title="Unavailable") 
     else:
         return render_template("stats.html",url=request.url,title="Stats - View data about your shortened links.",description="You can view information about your shortened links on this page.")
 
