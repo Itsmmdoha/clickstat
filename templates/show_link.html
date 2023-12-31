@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block static_files%}
-<link rel="stylesheet" href="{{ url_for('static', filename='show_link.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/show_link.css') }}">
 {% endblock%}
 
 
@@ -18,5 +18,5 @@
 <div class="custom-paragraph">
   <p>Please retain the <b>identifier</b> for future reference. You can use it on the <a href="/stats">stats</a> page to access details about the individuals who click the link, such as IP address, user agent and exact location if you've enabled <b>GPS Tracking</b>.</p>
 </div>
-<script src="{{ url_for('static', filename='show_link.js') }}"></script>
+<script src="{{ url_for('static', filename='js/show_link.js') }}"></script>
 {% endblock %}
