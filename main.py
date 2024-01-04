@@ -93,7 +93,7 @@ def fetchURL(identifier):
 @app.route("/stats",methods=["GET","POST"])
 def stats():
     if request.method == "POST":
-        identifier = request.form["identifier"][-6:]
+        identifier = request.form["identifier"].strip()[-6:]
         db = Dbm()
         result = db.get_stats(identifier)
         if result:
