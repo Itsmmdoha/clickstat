@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block static_files%}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock%}
+
+
+{% block content%}
+    <h1>CLICKSTAT</h1>
+    <h4>Enter a URL to shorten</h4>
+    <form action="createlink" method="post">
+        <input name="url" type="url" placeholder="Enter a URL">
+        <input type="submit" value="shorten" id="submit_button">
+        <br>
+        <label for="enable">Enable GPS tracking</label>
+        <input type="checkbox" id="enable" name="enable">
+    </form>
+
+    <div class="custom-paragraph">
+    <h4>Welcome to Clickstat - A URL Shortener with IP and GPS logging</h4>
+    <p>
+        Clickstat is a URL shortener with IP and GPS logging. Unlike other IP loggers that provide inaccurate location data, Clickstat utilizes GPS for pinpoint accuracy. Shorten your links with "GPS Tracking" enabled and get GPS location of those who click it. it's a powerful tool that empowers you to shorten links, while also gaining insights into the individuals who interact with them. With Clickstat, you can access valuable information such as IP addresses, user agents, and, if enabled, precise GPS locations of your link's clickers. 
+
+    </p>
+    <h5>How to Use Clickstat:</h5>
+    <p>
+        <strong>Step 1: Shorten Your Link</strong><br>
+
+        1. Paste your long URL into the provided form.<br>
+        2. Check the "Enable GPS Tracking" option if you want to log GPS data.<br>
+        3. Click the "Shorten" button.<br>
+        You'll receive a <b>shortened URL</b> and a unique <b>identifier</b>. The shortened URL is what you share, and the identifier is your key to accessing data about those who click on your link.
+
+        <br><br>Keep in mind that if you enable GPS Tracking, the individual who clicks the link will be asked to grant GPS permission for privacy and security reasons. If they allow it, they will gain access to the link, and we will log their location. If they don't grant permission, they won't be able to access the link, and we won't log their information. If you don't want any permission pop-ups don't use GPS logging. You will still be able view information like IP addresses and user agents!
+
+    </p>
+    <p>
+        <strong>Step 2: View User/Click Data</strong><br>
+        To access detailed statistics about the individuals who clicked your link:<br>
+        1. Navigate to the <a href="/stats">stats</a> page on Clickstat.<br>
+        2. Enter the identifier associated with your link.<br>
+        3. Click the "View" button to access the stats.
+    </p>
+    <h5>Why Choose Clickstat?</h5>
+    <p>
+        1. <strong>Speed and Reliability:</strong> Clickstat is designed for efficiency. Your links are shortened quickly, ensuring a seamless experience for both you and your audience.<br>
+        2. <strong>Data Privacy:</strong> We take your privacy seriously. Unlike other services, we do not sell your data to advertising providers. Your information is safe and secure with Clickstat.
+    </p>
+    <p>Experience the best and most feature-packed URL shortener on the internet. Clickstat - Your link management and tracking solution.</p>
+</div>
+
+{% endblock%}
