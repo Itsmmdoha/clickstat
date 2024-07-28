@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_DB: ${PGDATABASE}
+    ports:
+      - "5432:5432"
+
+  app:
+    depends_on:
+      - db
+    build:
+      context: ./app
+    env_file:
+      - .env
+    environment:
+      PGHOST: db
+    volumes:
+      - ./app:/app
+    ports:
+      - "5000:5000"
+    command: flask run --host=0.0.0.0 --debug
+
+volumes:
+  pgdata:

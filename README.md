@@ -11,53 +11,80 @@ Access it at [clickstat.xyz](https://clickstat.xyz)
 3. GPS Loggin
 4. IP lookup
 
-## Run Locally
+## Contribute
 
->steps:
->1. Setup PostgreSQL
->2. Get API token from ipinfo.io
->3. Set Environment Variables
->4. Install Requirements
->5. Run main.py
+clone the repository
 
-### Step1:
-
-Install PostgreSQL and Collect the collect/set your database credentials 
-
-### Step2:
-
-This Flask app uses the ipinfo.io API. Get your API token from [here.](https://ipinfo.io/).
-
-### Step3:
-
-The flask app collects the API and database credentials from your Environment Variables. To set the Variables, add the following lines to your .bashrc or .zshrc file
 ```bash
-# Databse Creds
-export PGPASSWORD='your_database_password'
-export PGHOST='your_host'
-export PGUSER='your_username'
-export PGPORT='your_port_number'
-export PGDATABASE='your_database_name'
-# API token
-export API_TOKEN='your ipinfo.io api token'
-
+git clone https://github.com/itsmmdoha/clickstat
 ```
-Make sure to replace accordingly with the actual credentials. After adding these lines, source the file by
+
+cd into the root directory
+
 ```bash
-source .bashrc
+cd clickstat
 ```
-or by
+The root directory contains an `app` folder will all the flask source files. 
+For ease, we recommend running the dev environment with docker. 
+clickstat uses postgreSQL for database and ipinfo.io API for ip lookup. 
+To set databse and API credential, create a `.env` file in the root directory and put the following content:
+
+```env
+# Database Credentials
+PGPASSWORD=testPassword
+PGUSER=HoundSec
+PGPORT=5432
+PGDATABASE=clickstat
+# API Token
+API_TOKEN=random_value_123456 #optional
+```
+
+if you want the ip lookup feature to work, put a real API key in the API_TOKEN variable.
+Get your API token from [here.](https://ipinfo.io/).
+
+To start the dev environment, make sure you have docker and docker compose installed and run the following command
+
 ```bash
-source .zshrc
+docker-compose -f dev-compose.yaml up --build
 ```
-if you're using zsh.
+This will spin up two containers; a container running the flask app and a container with postgreSQL database.
+And you are all good to go!
 
-### Step4:
+# Deployment
 
-Now it's time to install the Requirements. Go to the clickstat directory and type,
+clone the repository
+
 ```bash
-pip install -r requirements.txt
+git clone https://github.com/itsmmdoha/clickstat
 ```
-### Step5:
 
-Everything is set-up! Now just run the main.py file with python3.
+cd into the root directory
+
+```bash
+cd clickstat
+```
+The root directory contains an `app` folder will all the flask source files. 
+For ease, we recommend running the dev environment with docker. 
+clickstat uses postgreSQL for database and ipinfo.io API for ip lookup. 
+To set databse and API credential, create a `.env` file in the roo directory and put the following content:
+
+```env
+# Database Credentials
+PGPASSWORD=<set-a-database-password>
+PGUSER=HoundSec 
+PGPORT=5432
+PGDATABASE=clickstat
+# API Token
+API_TOKEN=<API-token-from-ipinfo.ip>
+```
+
+Get your API token from [here.](https://ipinfo.io/).
+
+Run the following command,
+
+```bash
+docker-compose up 
+```
+This will spin up two containers; a container running the gunicorn WSGI server on port 8000(mapped to localhost) and a container with postgreSQL database.
+Now, configure nginx as a proxy server and install a SSL cetificate using certbot and you're all done!
+For data safety, set up cronjobs for backup and restore of databse.
