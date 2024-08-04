@@ -85,7 +85,7 @@ def fetchURL(identifier):
             }
             db = Dbm()
             db.insert_into_data(data)
-            return redirect(result[0][0],code=302) 
+            return redirect(result[0][0],code=301) 
         elif result[0][1] == 1:
             return render_template("locate.html",identifier=identifier)
     else:
