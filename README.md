@@ -83,7 +83,7 @@ Get your API token from [here.](https://ipinfo.io/).
 Run the following command,
 
 ```bash
-docker-compose up 
+docker-compose up -d
 ```
 This will spin up two containers; a container running the gunicorn WSGI server on port 8000(mapped to localhost) and a container with postgreSQL database.
 Now, configure nginx as a proxy server and install a SSL cetificate using certbot and you're all done!
