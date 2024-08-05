@@ -3,7 +3,7 @@ services:
     image: postgres:latest
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./app/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db_init:/docker-entrypoint-initdb.d/
     env_file:
       - .env
     environment:

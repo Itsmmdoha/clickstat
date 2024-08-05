@@ -2,3 +2,4 @@ __*
 database.db
 *env
 .env
+db_init/01_backup.sql
