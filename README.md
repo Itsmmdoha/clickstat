@@ -133,23 +133,24 @@ This will create a backup file with the current date in the filename, stored in 
 - The `snap_db.sh` script is designed to store backups in the `backups` directory located at the root of your repository.
 - The `--no-owner` flag ensures that ownership information is excluded from the backup.
 
+
 ## Restore
 
-### Using `pg_restore`
-To restore the database, you can manually place the `01_backup.sql` file in the `db_init` directory, which will be executed when the PostgreSQL container starts. Alternatively, you can use the `pg_restore` command:
+### Understanding Initialization Scripts in PostgreSQL
+In the `db` service defined in the Docker Compose file, the `db_init` folder is mapped to the `/docker-entrypoint-initdb.d/` directory inside the PostgreSQL container. The PostgreSQL image automatically executes any scripts placed in this directory in alphanumerical order when the container starts. This mechanism is useful for tasks like setting up databases, creating tables, and restoring data from backups.
 
-```sh
-pg_restore -U <user> -h <database-host> -d <database-name> -1 01_backup.sql
-```
+### Restoring with Initialization Scripts
+To restore the database using this feature, follow these steps:
 
-### Steps to Restore using `snap_db.sh`
-1. Rename the desired backup file from the `backups` directory to `01_backup.sql`.
-2. Place the renamed file in the `db_init` directory.
-3. Run the Docker Compose setup:
+1. **Prepare the Backup File**: Rename the desired backup file from the `backups` directory to `01_backup.sql`. This ensures that the file is executed first, as scripts in the `db_init` directory are run alphabetically.
+
+2. **Place the File in the `db_init` Directory**: Move the `01_backup.sql` file to the `db_init` directory. Since this folder is mapped to `/docker-entrypoint-initdb.d/` in the PostgreSQL container for the `db` service, the script will be automatically executed on startup.
+
+3. **Run the Docker Compose Setup**: Start the Docker Compose setup:
     ```sh
     docker-compose up -d
     ```
-   The PostgreSQL container will detect the `01_backup.sql` file and execute it, restoring the database.
+   The PostgreSQL container in the `db` service will detect the `01_backup.sql` file in the `/docker-entrypoint-initdb.d/` directory and execute it automatically, restoring the database.
 
 ### Important Notes
 - Ensure the backup file is in `plain-text` format.
