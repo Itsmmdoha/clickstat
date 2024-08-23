@@ -9,6 +9,10 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://clickstat.xyz/whatsmyip</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://clickstat.xyz/stats</loc>
         <priority>0.8</priority>
     </url>
