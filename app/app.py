@@ -116,7 +116,18 @@ def ip_info(ip):
     if res.status_code == 200:
         data_string = res.text
         data = loads(data_string)
-        return render_template("ip_info.html",title="IP Info",ip=ip,data=data)
+        return render_template("ip_info.html",title="IP Info",message=f"About: {ip}",data=data)
+    else:
+        return render_template("error.html",error="Unknown Error")
+
+@app.route("/whatsmyip")
+def whatsmyip():
+    ip = get_client_ip(request)
+    res = get(f"https://ipinfo.io/{ip}?token={api_token}")
+    if res.status_code == 200:
+        data_string = res.text
+        data = loads(data_string)
+        return render_template("ip_info.html",title="What Is My IP Address - find information about your IP Address",description="Check your public IP address and learn about your location details, including city, region, country, and timezone. Our simple tool provides quick and easy access to this information, helping you understand more about your internet connection.",message=f"Your IP Address is: {ip}",data=data)
     else:
         return render_template("error.html",error="Unknown Error")
 
