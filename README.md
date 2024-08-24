@@ -1,14 +1,13 @@
 # Clickstat
-![preview](https://github.com/Itsmmdoha/clickstat/assets/70005698/c25de049-b2bc-48f5-9a3f-20b1c6b99f8a)
-Clickstat is 
-a URL shortener with IP and GPS logging. It logs information like IP address User-Agent and GPS-Coordinates if GPS Tracking is enabled.
+
+Clickstat is a URL shortener with IP and GPS logging. It logs information like IP address User-Agent and GPS-Coordinates if GPS Tracking is enabled.
 Access it at [clickstat.xyz](https://clickstat.xyz)
 
 ## Features
 
 1. IP Logging
 2. User-Agent Logging
-3. GPS Loggin
+3. GPS Coordinates Loggin
 4. IP lookup
 
 ## Contribute
@@ -63,10 +62,10 @@ cd into the root directory
 ```bash
 cd clickstat
 ```
-The root directory contains an `app` folder will all the flask source files. 
-For ease, we recommend running the dev environment with docker. 
+The root directory contains an `app` folder with all the flask app source files. 
+For ease, we recommend running clickstat with docker. 
 clickstat uses postgreSQL for database and ipinfo.io API for ip lookup. 
-To set databse and API credential, create a `.env` file in the roo directory and put the following content:
+To set databse and API credential, create a `.env` file in the root directory and put the following content:
 
 ```env
 # Database Credentials
@@ -91,9 +90,6 @@ For data safety, set up cronjobs for backup and restore of databse.
 
 
 # Database Backup & Restore
-
-## Initialization Scripts
-Initialization scripts located in the `db_init` directory are executed in alphabetical order when the PostgreSQL container starts. This ensures that scripts are run in the specified sequence, enabling proper database setup.
 
 ## Backup
 
