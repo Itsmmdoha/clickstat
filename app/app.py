@@ -30,6 +30,7 @@ def createlink():
     host = request.host.replace("www.","")
     if url=="":
         return render_template("invalid_url.html",title="Invalid URL")
+    #verify url
     ip = get_client_ip(request)
     if "enable" in request.form:
         TL = 1
