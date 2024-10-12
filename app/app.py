@@ -6,7 +6,7 @@ from requests import get
 from json import loads
 
 app = Flask(__name__)
-api_token = getenv("API_TOKEN",default="Undefined")
+api_token = getenv("IP_INFO_TOKEN",default="Undefined")
 
 database = Dbm()
 database.init()
@@ -30,7 +30,10 @@ def createlink():
     host = request.host.replace("www.","")
     if url=="":
         return render_template("invalid_url.html",title="Invalid URL")
-    #verify url
+    #check url for malicious use
+    if getenv("VERIFY_URL") and is_malicious(url):
+        return render_template("error.html",title="Malicious URL Detected",error="The URL you are trying to shorten has been flagged as unsafe or malicious. For security, we cannot process this request.")
+    
     ip = get_client_ip(request)
     if "enable" in request.form:
         TL = 1

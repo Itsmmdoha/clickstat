@@ -1,5 +1,7 @@
 import random
 import string
+from requests import post
+from os import getenv
 
 def generate_identifier(length=6):
     characters = string.ascii_letters
@@ -34,3 +36,32 @@ def get_client_ip(request):
         client_ip = request.remote_addr
     
     return client_ip
+
+def is_malicious(url):
+    api_key = getenv("SAFE_BROWSING_TOKEN",default="Undefined")
+    SAFE_BROWSING_URL = f'https://safebrowsing.googleapis.com/v4/threatMatches:find?key={api_key}'
+    
+    payload = {
+        "client": {
+            "clientId": "clickstat",
+            "clientVersion": "1.5.0"
+        },
+        "threatInfo": {
+            "threatTypes": ["MALWARE", "SOCIAL_ENGINEERING", "UNWANTED_SOFTWARE", "POTENTIALLY_HARMFUL_APPLICATION"],
+            "platformTypes": ["ANY_PLATFORM"],
+            "threatEntryTypes": ["URL"],
+            "threatEntries": [
+                {"url": url}
+            ]
+        }
+    }
+
+    response = post(SAFE_BROWSING_URL, json=payload)
+    result = response.json()
+    print(result,response.headers)
+
+    if 'matches' in result:
+        return True
+    else:
+        return False
+

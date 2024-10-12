@@ -1,32 +1,52 @@
 # Clickstat
 
-Clickstat is a URL shortener with IP and GPS logging. It logs information like IP address User-Agent and GPS-Coordinates if GPS Tracking is enabled.
+Clickstat is a no BS URL shortener with IP and GPS logging. It logs information like IP address User-Agent and GPS-Coordinates if GPS Tracking is enabled.
 Access it at [clickstat.xyz](https://clickstat.xyz)
 
 ## Features
 
-1. IP Logging
-2. User-Agent Logging
-3. GPS Coordinates Loggin
-4. IP lookup
+1. **URL Shortening**: Efficiently convert long URLs into short, shareable links.
+  
+2. **IP & User-Agent Logging**: Capture IP addresses and user-agent data for each link click.
+
+3. **Optional GPS Tracking**: Enable precise GPS tracking with user consent for enhanced location data.
+
+4. **Real-Time Click Stats**: Access detailed click statistics, including IP, GPS (if enabled), and user-agent, via a unique identifier.
+
+5. **Secure & Private**: Data is securely stored, with no third-party access or sharing.
+
+
+## APIs Used
+
+**Clickstat** uses the following APIs to enhance its functionality. Both are optional, but certain features depend on them being configured:
+
+1. **Google Safe Browsing API**: Used to check if URLs are malicious or flagged for phishing, malware, or other threats before shortening them. To enable URL verification, you need to include a valid API key and set the `VERIFY_URL` environment variable to `true`. If `VERIFY_URL` is set to `false`, the check will be skipped, which is useful if you don't have access to the API or don't require URL verification.
+   
+   Get your API key [here.](https://developers.google.com/safe-browsing/v4/get-started)
+
+2. **ipinfo.io API**: This API is used for IP address lookups to gather geographic or other information about users who access shortened links. If you don't provide an API key, the IP lookup feature in the web app will be disabled, but all other features will continue to work normally.
+
+   Get your API key [here.](https://ipinfo.io/)
+
+---
 
 ## Contribute
 
-clone the repository
+Clone the repository:
 
 ```bash
 git clone https://github.com/itsmmdoha/clickstat
 ```
 
-cd into the root directory
+Navigate into the root directory:
 
 ```bash
 cd clickstat
 ```
-The root directory contains an `app` folder will all the flask source files. 
-For ease, we recommend running the dev environment with docker. 
-clickstat uses postgreSQL for database and ipinfo.io API for ip lookup. 
-To set databse and API credential, create a `.env` file in the root directory and put the following content:
+
+The root directory contains an `app` folder with all the Flask source files. For ease, we recommend running the dev environment with Docker. Clickstat uses PostgreSQL for its database and also integrates with the ipinfo.io API and Google Safe Browsing API for enhanced features.
+
+To set up the database and API credentials, create a `.env` file in the root directory and include the following content:
 
 ```env
 # Database Credentials
@@ -34,60 +54,71 @@ PGPASSWORD=testPassword
 PGUSER=HoundSec
 PGPORT=5432
 PGDATABASE=clickstat
-# API Token
-API_TOKEN=random_value_123456 #optional
+VERIFY_URL=true # set to false to disable URL verification
+# API Tokens
+IP_INFO_TOKEN=<API token from ipinfo.io> #optional
+SAFE_BROWSING_TOKEN=<API token from Google Safe Browsing API> #optional
 ```
 
-if you want the ip lookup feature to work, put a real API key in the API_TOKEN variable.
-Get your API token from [here.](https://ipinfo.io/).
+- If the `VERIFY_URL` variable is set to `false`, the Google Safe Browsing check will be skipped. This is useful if you don't have access to the API or don't need URL verification.
+- If you don't set the `IP_INFO_TOKEN`, the IP lookup feature will not work, but all other features will continue to function as expected.
 
-To start the dev environment, make sure you have docker and docker compose installed and run the following command
+To start the development environment, make sure Docker and Docker Compose are installed, then run the following command:
 
 ```bash
 docker-compose -f dev-compose.yaml up --build
 ```
-This will spin up two containers; a container running the flask app and a container with postgreSQL database.
-Now you can open [http://localhost:5000](http://localhost:5000). And you are all good to go!
 
-# Deployment
+This will spin up two containers: one running the Flask app and another running the PostgreSQL database. You can now access the app at [http://localhost:5000](http://localhost:5000).
 
-clone the repository
+---
+
+## Deployment
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/itsmmdoha/clickstat
 ```
 
-cd into the root directory
+Navigate into the root directory:
 
 ```bash
 cd clickstat
 ```
-The root directory contains an `app` folder with all the flask app source files. 
-For ease, we recommend running clickstat with docker. 
-clickstat uses postgreSQL for database and ipinfo.io API for ip lookup. 
-To set databse and API credential, create a `.env` file in the root directory and put the following content:
+
+The root directory contains an `app` folder with all the Flask app source files. For ease, we recommend running clickstat with Docker. Clickstat uses PostgreSQL for its database, the ipinfo.io API for IP lookup, and the Google Safe Browsing API for URL security checks.
+
+To set up the database and API credentials, create a `.env` file in the root directory with the following content:
 
 ```env
 # Database Credentials
 PGPASSWORD=<set-a-database-password>
-PGUSER=HoundSec 
+PGUSER=HoundSec
 PGPORT=5432
 PGDATABASE=clickstat
-# API Token
-API_TOKEN=<API-token-from-ipinfo.io>
+VERIFY_URL=true # set to false to disable URL verification
+# API Tokens
+IP_INFO_TOKEN=<API token from ipinfo.io> #optional
+SAFE_BROWSING_TOKEN=<API token from Google Safe Browsing API> #optional
 ```
 
-Get your API token from [here.](https://ipinfo.io/).
+- If you don't want URL verification or don't have access to the Google Safe Browsing API, you can set `VERIFY_URL` to `false`. The URL shortening will proceed without checking for malicious URLs.
+- If the `IP_INFO_TOKEN` is not set, IP lookups will be disabled, but the rest of the app will work normally.
 
-Run the following command,
+Run the following command:
 
 ```bash
 docker-compose up -d
 ```
-This will spin up two containers; a container running the gunicorn WSGI server on port 8000(mapped to localhost) and a container with postgreSQL database.
-Now, configure nginx as a proxy server and install a SSL cetificate using certbot and you're all done!
-For data safety, set up cronjobs for backup and restore of databse.
 
+This will spin up two containers: one running the Gunicorn WSGI server on port 8000 (mapped to localhost) and another running the PostgreSQL database.
+
+For production, configure **nginx** as a proxy server and install an SSL certificate using **certbot**. Set up **cron jobs** for backup and restore of the database for data safety.
+
+---
+
+This version includes the `VERIFY_URL` option and explains how both APIs are optional depending on the functionality you want to enable.
 
 # Database Backup & Restore
 
